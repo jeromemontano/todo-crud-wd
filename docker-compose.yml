@@ -1,0 +1,33 @@
+version: '2'
+services:
+  # For WWW
+  www:
+    image: php:7.0-apache
+    ports:
+      - "80:80"
+    volumes:
+      - ./www:/var/www/html/
+    links:
+      - "web_api"
+
+  # For API
+  web_api:
+    build: ./todo-api
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./todo-api:/var/www/html/
+    links:
+      - "todo_db"
+
+
+  # For Database
+  todo_db:
+    image: mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./todo-db/:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+    command: mysqld
