@@ -13,8 +13,7 @@
         }
 
     } else {
-        echo "poropor";
-        exit;
+        header( 'Location: /view/404/' );
     }
 
 ?>

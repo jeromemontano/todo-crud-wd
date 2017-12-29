@@ -28,7 +28,7 @@
                         <form class="form-inline" action="" method="POST">
                             <input type="hidden" name="task_id" value="<?php echo $key ?>" />
                             <div class="form-group">
-                                <label for="exampleInputName2">Task Name</label>
+                                <label for="exampleInputName2">Task Name: </label>
                                 <input type="text" class="form-control" name="task_name" placeholder="Sample Task" required>
                             </div>
                             <input type="submit" class="btn btn-default" value="Add">

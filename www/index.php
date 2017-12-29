@@ -1,4 +1,5 @@
 <?php
-  header('Location: /view/tasks/');
-  exit();
+    session_start();
+    header('Location: /view/tasks/');
+    exit();
 ?>

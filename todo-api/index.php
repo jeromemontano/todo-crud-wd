@@ -7,48 +7,65 @@
     switch ($method) {
         case 'GET':
 
+            $sql = "SELECT * FROM tasks";
+
             if ($_GET['task_id']) {
-                $sth = $conn->prepare("SELECT * FROM tasks WHERE id = ".$_GET['task_id']);
-            } else {
-                $sth = $conn->prepare("SELECT * FROM tasks");
+                $sql = $sql." WHERE id = ".$_GET['task_id'];
             }
 
-            $sth->execute();
-            $result = $sth->fetchAll(PDO::FETCH_KEY_PAIR);
-            echo json_encode($result);
+            try {
+                $sth = $conn->prepare($sql);
+                $sth->execute();
+                $result = $sth->fetchAll(PDO::FETCH_KEY_PAIR);
+                echo json_encode($result);
+            } catch (Exception $e) {
+                die("ERROR");
+            }
             break;
 
         case 'POST':
 
             $task = $_POST['task_name'];
-            $sth = $conn->prepare("INSERT INTO tasks (action) VALUES ('".$task."')");
-            $sth->execute();
+            $sql = "INSERT INTO tasks (action) VALUES ('".$task."')";
 
-            echo "success";
+            try {
+                $sth = $conn->prepare($sql);
+                $sth->execute();
+            } catch (Exception $e) {
+                die("ERROR");
+            }
             break;
 
         case 'PUT':
 
             parse_str(file_get_contents("php://input"),$post_params);
 
-            $sth = $conn->prepare("UPDATE tasks SET action = :task_name WHERE id = :task_id");
-            $sth->bindParam(':task_name', $post_params['task_name']);
-            $sth->bindParam(':task_id', $post_params['id']);
-            $sth->execute();
+            $sql = "UPDATE tasks SET action = :task_name WHERE id = :task_id";
 
-            echo "success";
+            try {
+                $sth = $conn->prepare($sql);
+                $sth->bindParam(':task_name', $post_params['task_name']);
+                $sth->bindParam(':task_id', $post_params['id']);
+                $sth->execute();
+            } catch (Exception $e) {
+                die("ERROR");
+            }
             break;
 
         case 'DELETE':
 
             if ($_GET['task_id']) {
-                $sth = $conn->prepare("DELETE FROM tasks WHERE id = ".$_GET['task_id']);
+                $sql = "DELETE FROM tasks WHERE id = ".$_GET['task_id'];
             } else {
-                $sth = $conn->prepare("TRUNCATE TABLE tasks");
+                $sql = "TRUNCATE TABLE tasks";
             }
-            $sth->execute();
 
-            echo "success";
+            try {
+                $sth = $conn->prepare($sql);
+                $sth->execute();
+            } catch (Execute $e) {
+                die("ERROR");
+            }
             break;
 
         default:

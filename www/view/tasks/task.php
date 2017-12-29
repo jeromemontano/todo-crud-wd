@@ -10,8 +10,7 @@
 
     } else {
 
-        echo "poropor";
-        exit;
+        header( 'Location: /view/404/' );
 
     }
 ?>
@@ -29,7 +28,7 @@
                         </div>
                         <div class="col-md-6 right col-sm-6 col-xs-6">
                             <a class="btn btn-default" href="/view/tasks/update.php?task_id=<?php echo $key ?>">Update</a>
-                            <a class="btn btn-default" href="/view/tasks/delete.php?task_id=<?php echo $key ?>">Delete</a>
+                            <a class="btn btn-default btn-delete" data-elem="one" href="/view/tasks/delete.php?task_id=<?php echo $key ?>">Delete</a>
                             <a class="btn btn-default" href="/view/tasks/">Back to List</a>
                         </div>
                     </div>
@@ -40,5 +39,6 @@
             </div>
         </div>
     <?php include("../../view/partials/bottom.php"); ?>
+    <script type="text/javascript" src="../../public/js/delete-confirm.js"></script>
     </body>
 </html>

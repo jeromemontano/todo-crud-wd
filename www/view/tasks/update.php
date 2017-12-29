@@ -16,8 +16,7 @@
 
     } else {
 
-        echo "poropor";
-        exit;
+        header( 'Location: /view/404/' );
 
     }
 
@@ -35,7 +34,7 @@
                             <h4>View Task</h4>
                         </div>
                         <div class="col-md-6 right col-sm-6 col-xs-6">
-                            <a class="btn btn-default" href="/view/tasks/delete.php?task_id=<?php echo $key ?>">Delete</a>
+                            <a class="btn btn-default btn-delete" data-elem="one" href="/view/tasks/delete.php?task_id=<?php echo $key ?>">Delete</a>
                             <a class="btn btn-default" href="/view/tasks/">Back to List</a>
                         </div>
                     </div>
@@ -43,7 +42,7 @@
                         <form class="form-inline" action="" method="POST">
                             <input type="hidden" name="task_id" value="<?php echo $key ?>" />
                             <div class="form-group">
-                                <label for="exampleInputName2">Task Name</label>
+                                <label for="exampleInputName2">Task Name: </label>
                                 <input type="text" class="form-control" name="task_name" value="<?php echo $task->$key?>">
                             </div>
                             <input type="submit" class="btn btn-default" value="Update">
@@ -53,5 +52,6 @@
             </div>
         </div>
     <?php include("../../view/partials/bottom.php"); ?>
+    <script type="text/javascript" src="../../public/js/delete-confirm.js"></script>
     </body>
 </html>

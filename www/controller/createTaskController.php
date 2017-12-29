@@ -8,7 +8,15 @@ Class CreateTaskController {
         );
 
         $ctm = new CrudTaskModel();
-        $ctm->Post($data);
+        $result = $ctm->Post($data);
+
+        session_start();
+        if ($result == "ERROR") {
+            $_SESSION['msg'] = "Database Error";
+        } else {
+            $_SESSION['msg'] = "New Task Added";
+        }
+
         header( 'Location: /view/tasks/' );
     }
 

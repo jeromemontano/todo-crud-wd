@@ -4,12 +4,30 @@ Class ReadTaskController {
 
     function ReadOne($id){
         $ctm = new CrudTaskModel();
-        return json_decode($ctm->Get($id));
+
+        $result = $ctm->Get($id);
+
+        if ($result == "ERROR") {
+            session_start();
+            $_SESSION['msg'] = "Database Error";
+            return array();
+        } else {
+            return json_decode($result);
+        }
     }
 
     function ReadAll(){
         $ctm = new CrudTaskModel();
-        return json_decode($ctm->Get());
+
+        $result = $ctm->Get();
+
+        if ($result == "ERROR") {
+            session_start();
+            $_SESSION['msg'] = "Database Error";
+            return array();
+        } else {
+            return json_decode($result);
+        }
     }
 
 }

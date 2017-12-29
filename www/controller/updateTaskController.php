@@ -9,7 +9,14 @@ Class UpdateTaskController {
         );
 
         $ctm = new CrudTaskModel();
-        $ctm->Put($data);
+        $result = $ctm->Put($data);
+
+        session_start();
+        if ($result == "ERROR") {
+            $_SESSION['msg'] = "Database Error";
+        } else {
+            $_SESSION['msg'] = "Selected Task Updated";
+        }
 
         header( 'Location: /view/tasks/' );
 
