@@ -15,3 +15,5 @@ docker-compose up -d
 mysql -uroot -p -h 0.0.0.0
 
 #copy and execute script in init.sql to create db and table
+
+#view project by visiting localhost
